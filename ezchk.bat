@@ -23,6 +23,14 @@ echo ### ipconfig /all >> %FILENAME%
 ipconfig /all >> %FILENAME%
 
 echo: >> %FILENAME%
+echo ### netsh interface >> %FILENAME%
+netsh interface show interface >> %FILENAME%
+
+echo: >> %FILENAME%
+echo ### POWERSHELL: Wireless Modes >> %FILENAME%
+powershell.exe Get-NetAdapteradvancedproperty "Wi-Fi*" | find /I "mode" >> %FILENAME%
+
+echo: >> %FILENAME%
 echo ## Network Functions >> %FILENAME%
 
 echo: >> %FILENAME%
