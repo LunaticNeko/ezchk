@@ -20,6 +20,16 @@ that case.
 ## Potentially identifying data collected
 
 * MAC Addresses
+* Currently connected BSSID (directly connected wireless access point's MAC)
+
+By running this tool, you consent that the log file generated will contain this
+information. You however control who you send it to.
+
+## How to use:
+
+Double click to run the batch file.
+
+Send the generated log file (log.txt) to your tech support.
 
 ## TODO
 
