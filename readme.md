@@ -21,6 +21,7 @@ that case.
 
 * MAC Addresses
 * Currently connected BSSID (directly connected wireless access point's MAC)
+* Your domain name (may reveal your workplace/organization)
 
 By running this tool, you consent that the log file generated will contain this
 information. You however control who you send it to.
