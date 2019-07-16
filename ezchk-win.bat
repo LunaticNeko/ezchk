@@ -23,8 +23,12 @@ echo ### ipconfig /all >> %FILENAME%
 ipconfig /all >> %FILENAME%
 
 echo: >> %FILENAME%
-echo ### netsh interface >> %FILENAME%
+echo ### netsh interface show interface >> %FILENAME%
 netsh interface show interface >> %FILENAME%
+
+echo: >> %FILENAME%
+echo ### netsh wlan show interface >> %FILENAME%
+netsh wlan show interface >> %FILENAME%
 
 echo: >> %FILENAME%
 echo ### POWERSHELL: Wireless Modes >> %FILENAME%
