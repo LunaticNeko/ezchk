@@ -45,11 +45,11 @@ echo ### DNS >> %FILENAME%
 nslookup example.com 2>nul >> %FILENAME%
 
 echo: >> %FILENAME%
-echo ### HTTP >> %FILENAME%
+echo ### HTTP (True == Works) >> %FILENAME%
 powershell -Command "Invoke-Webrequest http://example.com/ >$null 2>$null ; $?"
 
 echo: >> %FILENAME%
-echo ### HTTPS >> %FILENAME%
+echo ### HTTPS (True == Works) >> %FILENAME%
 powershell -Command "Invoke-Webrequest https://example.com/ >$null 2>$null ; $?"
 
 :: TODO: Pass 2 should find and redact MAC addresses
