@@ -1,6 +1,9 @@
+:: ezchk, network adapter and functionality check for Windows
+:: This is the main file.
+
 @echo off
 
-set FILENAME= "log.txt"
+set FILENAME= "ezchk-log.txt"
 
 echo # ... ezchk Vital Information Diagnostics ... > %FILENAME%
 
@@ -41,4 +44,12 @@ echo: >> %FILENAME%
 echo ### DNS >> %FILENAME%
 nslookup example.com 2>nul >> %FILENAME%
 
+echo: >> %FILENAME%
+echo ### HTTP >> %FILENAME%
+powershell -Command "Invoke-Webrequest http://example.com/ >$null 2>$null ; $?"
 
+echo: >> %FILENAME%
+echo ### HTTPS >> %FILENAME%
+powershell -Command "Invoke-Webrequest https://example.com/ >$null 2>$null ; $?"
+
+:: TODO: Pass 2 should find and redact MAC addresses
