@@ -20,23 +20,30 @@ that case.
 
 ## Potentially identifying data collected
 
-* MAC Addresses
-* Currently connected BSSID (directly connected wireless access point's MAC)
-* Your domain name (may reveal your workplace/organization)
+* Anonymized MAC Addresses. We hide most of the meaningful part of your MAC
+  addresses, but retain: the first half (manufacturer identifier) and the last
+  two letters (for identification purposes on our side, if needed).
+* Access point you are currently connected to. This directly has to do with
+  infrastructure diagnosis.
+* Your domain name (may reveal your workplace/organization). We need this to
+  see if there are no faulty configuration files.
 
 By running this tool, you consent that the log file generated will contain this
 information. You however control who you send it to.
 
+## What is not collected
+
+* Unique IDs like IAID/DUID (for network configuration) and GUID (network
+  interface identifier) are completely hidden.
+* Your host name is completely hidden.
+
 ## How to use:
 
-Double click to run the batch file.
-
-Send the generated log file (log.txt) to your tech support.
+1. Double click to run the batch file.
+2. Send the generated log file (log.txt) to your tech support.
 
 ## TODO
 
-* Automatic MAC address masking/camouflage tool (might need a "second pass"
-  mechanism to go over the file and cover them up.) This will keep the OUI
-  (first half of the MAC address) but mask the second half to XX-WI-01 or
-  something.
-* Deal with conspicuous whitespace-only lines
+* More comprehensive and intelligent interface identity anonymization, e.g.
+  00:11:22:33:44:55 for Wi-Fi becomes 00:11:22:XX:WI:01 and 00:22:44:66:88:AA
+  for Ethernet becomes 00:22:44:XX:ET:02. If possible.
