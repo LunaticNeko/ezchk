@@ -15,6 +15,7 @@ that case.
 * Motherboard name and model
 * CPU manufacturer, name, data width ("bits"), No. (enabled/all) cores, threads
 * Network interface (ipconfig, netsh, and PS Get-NetAdapterAdvancedProperty)
+* Summary of configuration files (etc\hosts)
 * Network function verification (DNS test against example.com)
 
 ## Potentially identifying data collected
