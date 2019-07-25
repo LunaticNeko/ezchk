@@ -3,7 +3,7 @@
 
 @echo off
 
-set FILENAME= "ezchk-log.txt"
+set FILENAME="ezchk-log.txt"
 
 echo # ... ezchk Vital Information Diagnostics ... > %FILENAME%
 
@@ -60,7 +60,7 @@ echo\>> %FILENAME%
 echo ### POWERSHELL: HTTPS (True == Works) >> %FILENAME%
 powershell -Command "Invoke-Webrequest https://example.com/ >$null 2>$null ; $?" >> %FILENAME%
 
-:: TODO: Pass 2 should find and redact MAC addresses
+:: Pass 2 to find and redact MAC addresses and other PIIs
 echo Removing Personally Identifiable Information
 
 set "UID_FIND='(IAID|DUID|GUID)(.*: *)(.*)'"
