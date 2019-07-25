@@ -61,9 +61,17 @@ echo ### POWERSHELL: HTTPS (True == Works) >> %FILENAME%
 powershell -Command "Invoke-Webrequest https://example.com/ >$null 2>$null ; $?" >> %FILENAME%
 
 :: TODO: Pass 2 should find and redact MAC addresses
-echo Redacting Personal Information
+echo Removing Personally Identifiable Information
 
-:: MAC Addresses 
-powershell -Command "(Get-Content %FILENAME%) -replace '(IAID|DUID|GUID)(.*: *)(.*)', '$1$2[Hidden]' -replace '(Physical)(.*)([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2})', '$1$2$3:$4:$5:XX:XX:$8' -replace '(Physical)(.*)([0-9A-F]{2})\-([0-9A-F]{2})\-([0-9A-F]{2})\-([0-9A-F]{2})\-([0-9A-F]{2})\-([0-9A-F]{2})', '$1$2$3:$4:$5:XX:XX:$8' -replace '(Host Name.*:\s*)(\S+)', '$1[Hidden]' | Out-File -encoding ascii %FILENAME%"
+set "UID_FIND='(IAID|DUID|GUID)(.*: *)(.*)'"
+set "UID_REPLACE='$1$2[Hidden]'"
+set "MACADDR_WMICNIC_FIND='(\d+\s+)([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2})'"
+set "MACADDR_WMICNIC_REPLACE='$1$2:$3:$4:XX:XX:$7'"
+set "MACADDR_PHYSICAL_FIND='(Physical)(.*)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})'"
+set "MACADDR_PHYSICAL_REPLACE='$1$2$3:$5:$7:XX:XX:$13'"
+set "HOSTNAME_FIND='(Host Name.*:\s*)(\S+)'"
+set "HOSTNAME_REPLACE='$1[Hidden]'"
+
+powershell -Command "(Get-Content %FILENAME%) -replace %UID_FIND%, %UID_REPLACE% -replace %MACADDR_WMICNIC_FIND%, %MACADDR_WMICNIC_REPLACE% -replace %MACADDR_PHYSICAL_FIND%, %MACADDR_PHYSICAL_REPLACE% -replace %HOSTNAME_FIND%, %HOSTNAME_REPLACE% | Out-File -encoding ascii %FILENAME%"
 
 echo All done. Please submit %FILENAME% to your system administrator.
