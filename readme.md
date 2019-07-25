@@ -38,5 +38,4 @@ Send the generated log file (log.txt) to your tech support.
   mechanism to go over the file and cover them up.) This will keep the OUI
   (first half of the MAC address) but mask the second half to XX-WI-01 or
   something.
-* HTTP checker without cURL (our users are not tech-savvy).
-
+* Deal with conspicuous whitespace-only lines
