@@ -54,11 +54,11 @@ nslookup example.com 2>nul >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### POWERSHELL: HTTP (True == Works) >> %FILENAME%
-powershell -Command "Invoke-Webrequest http://example.com/ >$null 2>$null ; $?" >> %FILENAME%
+powershell -Command "Invoke-Webrequest -UseBasicParsing http://example.com/ >$null 2>$null ; $?" >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### POWERSHELL: HTTPS (True == Works) >> %FILENAME%
-powershell -Command "Invoke-Webrequest https://example.com/ >$null 2>$null ; $?" >> %FILENAME%
+powershell -Command "Invoke-Webrequest -UseBasicParsing https://example.com/ >$null 2>$null ; $?" >> %FILENAME%
 
 :: Pass 2 to find and redact MAC addresses and other PIIs
 echo Removing Personally Identifiable Information
@@ -67,7 +67,7 @@ set "UID_FIND='(IAID|DUID|GUID)(.*: *)(.*)'"
 set "UID_REPLACE='$1$2[Hidden]'"
 set "MACADDR_WMICNIC_FIND='(\d+\s+)([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2})'"
 set "MACADDR_WMICNIC_REPLACE='$1$2:$3:$4:XX:XX:$7'"
-set "MACADDR_PHYSICAL_FIND='(Physical)(.*)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})'"
+set "MACADDR_PHYSICAL_FIND='(\w+)(.*)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})'"
 set "MACADDR_PHYSICAL_REPLACE='$1$2$3:$5:$7:XX:XX:$13'"
 set "HOSTNAME_FIND='(Host Name.*:\s*)(\S+)'"
 set "HOSTNAME_REPLACE='$1[Hidden]'"
