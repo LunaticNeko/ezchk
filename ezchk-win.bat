@@ -52,13 +52,16 @@ echo\>> %FILENAME%
 echo ### DNS (Default) >> %FILENAME%
 nslookup example.com 2>nul >> %FILENAME%
 
-echo\>> %FILENAME%
-echo ### POWERSHELL: HTTP (True == Works) >> %FILENAME%
-powershell -Command "Invoke-Webrequest -UseBasicParsing http://example.com/ >$null 2>$null ; $?" >> %FILENAME%
+set "TEST_URI_HTTP='http://example.come'"
+set "TEST_URI_HTTPS='https://example.com'"
 
 echo\>> %FILENAME%
-echo ### POWERSHELL: HTTPS (True == Works) >> %FILENAME%
-powershell -Command "Invoke-Webrequest -UseBasicParsing https://example.com/ >$null 2>$null ; $?" >> %FILENAME%
+echo ### POWERSHELL: HTTP >> %FILENAME%
+call :MakeWebRequest %TEST_URI_HTTP% >> %FILENAME%
+
+echo\>> %FILENAME%
+echo ### POWERSHELL: HTTPS >> %FILENAME%
+call :MakeWebRequest %TEST_URI_HTTPS% >> %FILENAME%
 
 :: Pass 2 to find and redact MAC addresses and other PIIs
 echo Removing Personally Identifiable Information
@@ -75,3 +78,9 @@ set "HOSTNAME_REPLACE='$1[Hidden]'"
 powershell -Command "(Get-Content %FILENAME%) -replace %UID_FIND%, %UID_REPLACE% -replace %MACADDR_WMICNIC_FIND%, %MACADDR_WMICNIC_REPLACE% -replace %MACADDR_PHYSICAL_FIND%, %MACADDR_PHYSICAL_REPLACE% -replace %HOSTNAME_FIND%, %HOSTNAME_REPLACE% | Out-File -encoding ascii %FILENAME%"
 
 echo All done. Please submit %FILENAME% to your system administrator.
+
+exit /B %ERRORLEVEL%
+
+:MakeWebRequest
+powershell -Command "try {Invoke-WebRequest -UseBasicParsing %~1 | Select-Object -Property StatusCode,StatusDescription | Format-List | Write-Output} catch [System.Net.WebException] {[PSCustomObject]@{Status=$_.Exception.Status;StatusCode=[Int]$_.Exception.Response.StatusCode;StatusDescription=$_.Exception.Response.StatusDescription} | Format-List | Write-Output}"
+exit /B 0
