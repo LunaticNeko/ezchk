@@ -10,7 +10,19 @@ being Windows users, there are no plans for other OS support.
 Frankly, I'll just have to make tailored tools for other operating systems in
 that case.
 
-## Data Collected (Windows)
+## Data Collection
+
+ezchk collects some *GENERAL* information of *YOUR* computer and current network
+availability status. However, the *ACCESS POINT INFORMATION* of your network
+*ARE COLLECTED IN FULL*.
+
+This means you *SHOULD NOT* send this to anyone outside of your household,
+company, or school.
+
+This policy was chosen due to our original intended use: for tech support within
+the same organization by a local administrator.
+
+### General data collected (Windows)
 
 * Motherboard name and model
 * CPU manufacturer, name, data width ("bits"), No. (enabled/all) cores, threads
@@ -18,7 +30,7 @@ that case.
 * Summary of configuration files (etc\hosts)
 * Network function verification (DNS test against example.com)
 
-## Potentially identifying data collected
+### Potentially identifying data collected
 
 * Anonymized MAC Addresses. We hide most of the meaningful part of your MAC
   addresses, but retain: the first half (manufacturer identifier) and the last
@@ -31,7 +43,7 @@ that case.
 By running this tool, you consent that the log file generated will contain this
 information. You however control who you send it to.
 
-## What is not collected
+### What is not collected
 
 * Unique IDs like IAID/DUID (for network configuration) and GUID (network
   interface identifier) are completely hidden.
