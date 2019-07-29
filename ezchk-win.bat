@@ -70,9 +70,9 @@ set "UID_FIND='(IAID|DUID|GUID)(.*: *)(.*)'"
 set "UID_REPLACE='$1$2[Hidden]'"
 set "MACADDR_WMICNIC_FIND='(\d+\s+)([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2}):([0-9A-F]{2})'"
 set "MACADDR_WMICNIC_REPLACE='$1$2:$3:$4:XX:XX:$7'"
-set "MACADDR_PHYSICAL_FIND='(\w+)(.*)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})(:|\-)([0-9A-F]{2})'"
+set "MACADDR_PHYSICAL_FIND='(^(?!.*?BSSID).*\w+)(.*)([0-9a-fA-F]{2})(:|\-)([0-9a-fA-F]{2})(:|\-)([0-9a-fA-F]{2})(:|\-)([0-9a-fA-F]{2})(:|\-)([0-9a-fA-F]{2})(:|\-)([0-9a-fA-F]{2})'"
 set "MACADDR_PHYSICAL_REPLACE='$1$2$3:$5:$7:XX:XX:$13'"
-set "HOSTNAME_FIND='(Host Name.*:\s*)(\S+)'"
+set "HOSTNAME_FIND='(Host Name.*:\s*)(\S+)'" ::TODO add Japanese support
 set "HOSTNAME_REPLACE='$1[Hidden]'"
 
 powershell -Command "(Get-Content %FILENAME%) -replace %UID_FIND%, %UID_REPLACE% -replace %MACADDR_WMICNIC_FIND%, %MACADDR_WMICNIC_REPLACE% -replace %MACADDR_PHYSICAL_FIND%, %MACADDR_PHYSICAL_REPLACE% -replace %HOSTNAME_FIND%, %HOSTNAME_REPLACE% | Out-File -encoding ascii %FILENAME%"
