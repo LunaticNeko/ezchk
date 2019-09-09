@@ -104,7 +104,7 @@ somewhere in C:\Users\\(YourName)\\
 
 Lead Author: Chawanat Nakasan
 
-Email (current): <firstname>@staff.kanazawa-u.ac.jp
+Email (current): {firstname}@staff.kanazawa-u.ac.jp
 
 Proudly Programmed in Kanazawa!
 
