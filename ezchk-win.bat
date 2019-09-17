@@ -1,5 +1,8 @@
 :: ezchk, network adapter and functionality check for Windows
-:: This is the main file.
+::
+:: This is the main file for ezchk project
+:: (C) 2019 Chawanat Nakasan. Released under MIT License.
+:: See readme.md and license.md for more details.
 
 :Main
 
