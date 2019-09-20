@@ -33,7 +33,11 @@ echo ### ipconfig /all >> %FILENAME%
 ipconfig /all >> %FILENAME%
 
 echo\>> %FILENAME%
-echo ### PS: Interfaces >> %FILENAME%
+echo ### PS: Adapters >> %FILENAME%
+powershell.exe -Command "Get-NetAdapter | Format-List" >> %FILENAME%
+
+echo\>> %FILENAME%
+echo ### PS: Configuration >> %FILENAME%
 powershell.exe -Command "Get-NetIPConfiguration -AllCompartments -Detailed | Format-List" >> %FILENAME%
 
 echo\>> %FILENAME%
