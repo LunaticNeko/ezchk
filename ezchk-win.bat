@@ -10,6 +10,9 @@
 
 set FILENAME="ezchk-log.txt"
 
+echo ezchk computer diagnosis tool, version 0.01
+echo
+
 echo # ... ezchk Vital Information Diagnostics ... > %FILENAME%
 
 echo Getting System Configuration
