@@ -20,20 +20,22 @@ echo Getting System Configuration
 echo ## Hardware >> %FILENAME%
 
 echo\>> %FILENAME%
-echo ### WMIC baseboard >> %FILENAME%
-wmic baseboard get manufacturer,model | find /v "" >> %FILENAME%
+echo ### PS: CIM Basic Information >> %FILENAME%
+powershell.exe -Command "Get-CimInstance -ClassName CIM_System | select manufacturer,model | Format-List" >> %FILENAME%
+powershell.exe -Command "Get-CimInstance -ClassName Win32_BaseBoard | select manufacturer,model | Format-List" >> %FILENAME%
+
+echo\>> %FILENAME%
+echo ### PS: CIM BIOS >> %FILENAME%
+powershell.exe -Command "Get-CimInstance -ClassName CIM_BIOSElement | select manufacturer,name,version | Format-List" >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### WMIC CPU >> %FILENAME%
-wmic cpu get manufacturer,name,datawidth,numberofcores,numberofenabledcore,threadcount | find /v "" >> %FILENAME%
+rem wmic cpu get manufacturer,name,datawidth,numberofcores,numberofenabledcore,threadcount | find /v ""
+powershell.exe -Command "Get-CimInstance -ClassName CIM_Processor | select manufacturer,name,maxclockspeed | Format-List" >> %FILENAME%
 
 echo\>> %FILENAME%
-echo ### WMIC NIC >> %FILENAME%
-wmic nic get adaptertype,manufacturer,name,index,macaddress | find /v "" >> %FILENAME%
-
-echo\>> %FILENAME%
-echo ### ipconfig /all >> %FILENAME%
-ipconfig /all >> %FILENAME%
+echo ### PS: CIM Video/GPU/Graphics >> %FILENAME%
+powershell.exe -Command "Get-CimInstance -ClassName CIM_VideoController | select deviceid,name,status,driverversion | Format-List" >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### PS: Adapters >> %FILENAME%
@@ -53,7 +55,7 @@ netsh wlan show interface >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### POWERSHELL: Wireless Modes >> %FILENAME%
-powershell.exe Get-NetAdapteradvancedproperty "Wi-Fi*" | find /I "mode" >> %FILENAME%
+powershell.exe -Command "Get-NetAdapterAdvancedProperty 'Wi-Fi*' | where-object {($_.DisplayName -like '*Mode*') -or ($_.DisplayName -like '*802.11*')}" >> %FILENAME%
 
 echo\>> %FILENAME%
 echo ### POWERSHELL: Number of Meaningful Lines in etc/hosts file >> %FILENAME%
